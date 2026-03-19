@@ -1,0 +1,165 @@
+/* ============================================
+ * Glass — Vietnam Trending (Stitch Prototype)
+ * ============================================
+ * Exact glass card styles from Stitch HTML.
+ * ============================================ */
+
+/* ---- Base glass card (glass-card from prototype) ---- */
+.glass {
+  background: var(--color-bg-card, rgba(30, 41, 59, 0.4));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border-glass-hover, rgba(255, 255, 255, 0.12));
+  border-radius: 20px;
+}
+
+.glass:hover {
+  background: var(--color-bg-card-hover, rgba(30, 41, 59, 0.6));
+}
+
+/* ---- Ultra glass (glass-card-ultra) — for market status ---- */
+.glass-ultra {
+  background: rgba(15, 23, 42, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+}
+
+/* ---- Minimal glass (glass-card-minimal) — light mode ready ---- */
+.glass-minimal {
+  background: var(--color-bg-card, rgba(30, 41, 59, 0.4));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 0.5px solid var(--color-border-glass-hover, rgba(255, 255, 255, 0.12));
+  border-radius: 24px;
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* ---- Premium card (card-premium) — solid surface ---- */
+.card-premium {
+  background-color: var(--color-bg-card-solid, #1E293B);
+  border: 1px solid var(--color-border-glass, rgba(255, 255, 255, 0.08));
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* ---- Nav blur ---- */
+.nav-blur {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ---- Elevated glass (modals, dropdowns) ---- */
+.glass-elevated {
+  background: var(--color-bg-card-solid, #1E293B);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-border-glass-hover);
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Glass inner shine ---- */
+.glass-shine {
+  position: relative;
+}
+
+.glass-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+/* ---- Glowing green accent ---- */
+.glowing-green {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+/* ---- Sparkline styles ---- */
+.sparkline-up {
+  stroke: var(--color-accent-green);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.sparkline-down {
+  stroke: var(--color-accent-red);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* ---- No scrollbar utility ---- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ---- Neon text glow ---- */
+.text-glow-green {
+  text-shadow: 0 0 10px var(--color-accent-green-glow);
+}
+
+.text-glow-red {
+  text-shadow: 0 0 10px var(--color-accent-red-glow);
+}
+
+/* ---- Gradient backgrounds ---- */
+.gradient-green {
+  background: linear-gradient(135deg, #34D399, #10B981);
+}
+
+.gradient-red {
+  background: linear-gradient(135deg, #FB7185, #F43F5E);
+}
+
+/* ---- Splash screen utilities ---- */
+.splash-bg {
+  background: var(--color-splash-bg);
+}
+
+.splash-logo-gradient {
+  background: linear-gradient(135deg, var(--color-splash-green), var(--color-accent-blue));
+}
+
+.splash-logo-glow {
+  box-shadow: 0 0 60px color-mix(in srgb, var(--color-splash-green) 40%, transparent);
+}
+
+.splash-glow-backdrop {
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-splash-green) 15%, transparent) 0%, transparent 70%);
+}
+
+.splash-text-glow {
+  text-shadow: 0 0 40px color-mix(in srgb, var(--color-splash-green) 30%, transparent);
+}
+
+.splash-bar-gradient {
+  background: linear-gradient(90deg, var(--color-splash-green), var(--color-accent-blue));
+}
+
+/* ---- Dynamic bar width (reads --bar-w CSS variable) ---- */
+.bar-dynamic {
+  width: var(--bar-w, 0%);
+}
+
+/* ---- Dynamic bar height (reads --bar-h CSS variable) ---- */
+.bar-dynamic-h {
+  height: var(--bar-h, 0%);
+}

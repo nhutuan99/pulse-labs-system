@@ -1,0 +1,88 @@
+/* ============================================
+ * Colors — Vietnam Trending (Stitch Prototype)
+ * ============================================
+ * Exact tokens from Stitch HTML export.
+ * ============================================ */
+
+@theme {
+  /* ---- App Background ---- */
+  --color-bg-app: #0F172A;
+  --color-bg-app-secondary: #1E293B;
+  --color-bg-app-tertiary: #0F172A;
+
+  /* ---- Card / Surface ---- */
+  --color-bg-card: rgba(30, 41, 59, 0.4);
+  --color-bg-card-solid: #1E293B;
+  --color-bg-card-hover: rgba(30, 41, 59, 0.6);
+  --color-bg-card-active: rgba(15, 23, 42, 0.2);
+  --color-bg-elevated: rgba(255, 255, 255, 0.05);
+
+  /* ---- Glass Borders ---- */
+  --color-border-glass: rgba(255, 255, 255, 0.08);
+  --color-border-glass-hover: rgba(255, 255, 255, 0.12);
+  --color-border-glass-active: rgba(255, 255, 255, 0.15);
+
+  /* ---- Brand / Primary ---- */
+  --color-primary: #10B981;
+  --color-primary-hover: #059669;
+  --color-primary-light: rgba(16, 185, 129, 0.1);
+  --color-primary-dark: #047857;
+
+  /* ---- Accent — Bullish / Success ---- */
+  --color-accent-green: #10B981;
+  --color-accent-green-dim: rgba(16, 185, 129, 0.1);
+  --color-accent-green-glow: rgba(16, 185, 129, 0.2);
+
+  /* ---- Accent — Bearish / Danger ---- */
+  --color-accent-red: #F43F5E;
+  --color-accent-red-dim: rgba(244, 63, 94, 0.1);
+  --color-accent-red-glow: rgba(244, 63, 94, 0.2);
+
+  /* ---- Accent — Warning ---- */
+  --color-accent-yellow: #FBBF24;
+  --color-accent-yellow-dim: rgba(251, 191, 36, 0.1);
+
+  /* ---- Accent — Purple ---- */
+  --color-accent-purple: #A855F7;
+  --color-accent-purple-dim: rgba(168, 85, 247, 0.1);
+
+  /* ---- Accent — Cyan ---- */
+  --color-accent-cyan: #22D3EE;
+  --color-accent-cyan-dim: rgba(34, 211, 238, 0.1);
+
+  /* ---- Accent — Blue ---- */
+  --color-accent-blue: #3B82F6;
+  --color-accent-blue-dim: rgba(59, 130, 246, 0.1);
+
+  /* ---- Accent — Orange ---- */
+  --color-accent-orange: #F97316;
+  --color-accent-orange-dim: rgba(249, 115, 22, 0.1);
+
+  /* ---- Text ---- */
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #475569;
+  --color-text-inverse: #0F172A;
+
+  /* ---- Dividers ---- */
+  --color-divider: rgba(255, 255, 255, 0.05);
+  --color-divider-strong: rgba(255, 255, 255, 0.1);
+
+  /* ---- Status ---- */
+  --color-success: #10B981;
+  --color-success-light: rgba(16, 185, 129, 0.1);
+  --color-warning: #FBBF24;
+  --color-warning-light: rgba(251, 191, 36, 0.1);
+  --color-error: #F43F5E;
+  --color-error-light: rgba(244, 63, 94, 0.1);
+  --color-info: #3B82F6;
+  --color-info-light: rgba(59, 130, 246, 0.1);
+
+  /* ---- Overlay ---- */
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  --color-overlay-heavy: rgba(0, 0, 0, 0.8);
+
+  /* ---- Splash ---- */
+  --color-splash-bg: #0A0A0F;
+  --color-splash-green: #00E68A;
+}

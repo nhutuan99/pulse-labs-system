@@ -1,0 +1,27 @@
+/* ============================================
+ * Global Stylesheet — Entry Point
+ * ============================================
+ * TailwindCSS v4 + modular CSS imports.
+ * Order matters: tailwind first, then tokens,
+ * then base styles, then components.
+ * ============================================ */
+
+@import 'tailwindcss';
+
+/* ---- Design tokens ---- */
+@import '../styles/breakpoints.css';
+@import '../styles/colors.css';
+@import '../styles/fonts.css';
+@import '../styles/spacing.css';
+@import '../styles/shadows.css';
+
+/* ---- Base & layout ---- */
+@import '../styles/base.css';
+@import '../styles/grid.css';
+
+/* ---- Component styles ---- */
+@import '../styles/glass.css';
+@import '../styles/light-theme.css';
+
+/* ---- Animations ---- */
+@import '../styles/animations.css';

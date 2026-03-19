@@ -1,0 +1,15 @@
+/* ============================================
+ * Breakpoints — TailwindCSS v4 @theme (rem)
+ * ============================================
+ * Mobile-first breakpoint scale.
+ * Usage: sm:, md:, lg:, xl:, 2xl: prefixes
+ * ============================================ */
+
+@theme {
+  --breakpoint-xs: 30rem;   /* 480px  — Small mobile     */
+  --breakpoint-sm: 40rem;   /* 640px  — Large mobile     */
+  --breakpoint-md: 48rem;   /* 768px  — Tablet portrait  */
+  --breakpoint-lg: 64rem;   /* 1024px — Tablet landscape */
+  --breakpoint-xl: 80rem;   /* 1280px — Desktop          */
+  --breakpoint-2xl: 96rem;  /* 1536px — Large desktop    */
+}

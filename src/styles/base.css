@@ -1,0 +1,71 @@
+/* ============================================
+ * Base — Vietnam Trending (Stitch Prototype)
+ * ============================================
+ * Plus Jakarta Sans font, dark body, scrollbar.
+ * ============================================ */
+
+/* ---- Root ---- */
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  color-scheme: dark;
+}
+
+/* ---- Body ---- */
+body {
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg-app, #0F172A);
+  color: var(--color-text-primary, #F8FAFC);
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ---- Scrollbar — Webkit ---- */
+body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted, #475569);
+  border: 2px solid var(--color-bg-app, #0F172A);
+  border-radius: 6.5rem;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary, #94A3B8);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--color-bg-app, #0F172A);
+}
+
+/* ---- Scrollbar — Firefox ---- */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-text-muted, #475569) var(--color-bg-app, #0F172A);
+}
+
+/* ---- Hide scrollbar ---- */
+.hide-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: var(--color-text-primary, #F8FAFC);
+}
+
+/* ---- Misc ---- */
+img {
+  -webkit-user-drag: none;
+}

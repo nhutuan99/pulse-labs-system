@@ -1,0 +1,29 @@
+/* ============================================
+ * Shadows — Dark Theme
+ * ============================================
+ * Elevation tokens for glassmorphism dashboard.
+ * ============================================ */
+
+@theme {
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3),
+                 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.4),
+                       0 2px 4px rgba(0, 0, 0, 0.3);
+
+  --shadow-dropdown: 0 8px 32px rgba(0, 0, 0, 0.5),
+                     0 4px 8px rgba(0, 0, 0, 0.4);
+
+  --shadow-modal: 0 25px 60px rgba(0, 0, 0, 0.6),
+                  0 10px 24px rgba(0, 0, 0, 0.4);
+
+  --shadow-navbar: 0 1px 4px rgba(0, 0, 0, 0.4);
+
+  --shadow-sidebar: 2px 0 12px rgba(0, 0, 0, 0.4);
+
+  --shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.3);
+
+  --shadow-glow-green: 0 0 20px rgba(0, 230, 138, 0.2);
+
+  --shadow-glow-red: 0 0 20px rgba(255, 77, 106, 0.2);
+}
