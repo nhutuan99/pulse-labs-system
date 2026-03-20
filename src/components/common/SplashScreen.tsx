@@ -25,40 +25,48 @@ const PARTICLE_DATA = Array.from({ length: 20 }, (_, i) => ({
 }));
 
 export default function SplashScreen() {
-  // Lazy initializer: runs once during the first render.
-  // On the server (SSR) sessionStorage doesn't exist, so we default to
-  // 'loading' which keeps the overlay visible and prevents a flash of
-  // content. On the client, we can read sessionStorage immediately:
-  //   • already shown → 'done'  (skip splash entirely, no extra render)
-  //   • first visit   → 'intro' (start animation, no extra render)
-  const [phase, setPhase] = useState<'loading' | 'intro' | 'glow' | 'exit' | 'done'>(() => {
-    if (typeof window === 'undefined') return 'loading';
-    return sessionStorage.getItem('splash_shown') ? 'done' : 'intro';
-  });
+  // Start with 'loading' universally (SSR-safe). The useEffect below
+  // will resolve this to the correct phase after hydration.
+  const [phase, setPhase] = useState<'loading' | 'intro' | 'glow' | 'exit' | 'done'>('loading');
 
-  // Separate effects for each phase so that cleaning up one
-  // timeout never cancels a later phase transition.
-
+  // Single orchestrating effect: runs once after hydration and drives
+  // the entire animation sequence via nested timeouts.
+  // This avoids chained [phase]-dependent effects which can be broken
+  // by React Compiler optimisations or hydration edge-cases.
   useEffect(() => {
-    if (phase !== 'intro') return;
-    const t = setTimeout(() => setPhase('glow'), 400);
-    return () => clearTimeout(t);
-  }, [phase]);
+    // Already shown this session → skip instantly
+    if (sessionStorage.getItem('splash_shown')) {
+      queueMicrotask(() => setPhase('done'));
+      return;
+    }
 
-  useEffect(() => {
-    if (phase !== 'glow') return;
-    const t = setTimeout(() => setPhase('exit'), 1800);
-    return () => clearTimeout(t);
-  }, [phase]);
+    // Kick off the animation chain
+    queueMicrotask(() => setPhase('intro'));
 
-  useEffect(() => {
-    if (phase !== 'exit') return;
-    const t = setTimeout(() => {
-      setPhase('done');
-      sessionStorage.setItem('splash_shown', '1');
-    }, 800);
-    return () => clearTimeout(t);
-  }, [phase]);
+    const t1 = setTimeout(() => {
+      setPhase('glow');
+
+      const t2 = setTimeout(() => {
+        setPhase('exit');
+
+        const t3 = setTimeout(() => {
+          setPhase('done');
+          sessionStorage.setItem('splash_shown', '1');
+        }, 800);
+
+        // store for cleanup
+        timers.push(t3);
+      }, 1800);
+
+      timers.push(t2);
+    }, 400);
+
+    const timers: ReturnType<typeof setTimeout>[] = [t1];
+
+    return () => {
+      timers.forEach(clearTimeout);
+    };
+  }, []);
 
   // Only hide after animation finishes (or was skipped via sessionStorage)
   if (phase === 'done') return null;
