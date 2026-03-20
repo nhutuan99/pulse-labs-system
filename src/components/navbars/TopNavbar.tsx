@@ -13,6 +13,7 @@ import {
 } from 'react-icons/hi';
 import LoginModal from '@/components/modals/LoginModal';
 import { useTheme } from '@/providers/AppProvider';
+import { Button, Input } from '@/components/base';
 
 const navItems = [
   { label: 'Markets', href: '/' },
@@ -32,11 +33,11 @@ export default function TopNavbar() {
 
   return (
     <>
-      <header className="nav-blur sticky top-0 z-50 border-b border-white/5 h-16 flex items-center px-6 justify-between">
+      <header className="nav-blur sticky top-0 z-50 flex h-16 items-center justify-between border-b border-white/5 px-6">
         <div className="flex items-center gap-10">
           {/* Mobile menu button */}
           <button
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-text-secondary transition-colors hover:text-text-primary xl:hidden"
+            className="text-text-secondary hover:text-text-primary flex h-8 w-8 items-center justify-center rounded-lg transition-colors xl:hidden"
             aria-label="Menu"
             id="nav-menu-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -46,23 +47,21 @@ export default function TopNavbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="bg-primary/20 p-1.5 rounded-lg border border-primary/20">
-              <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="currentColor">
+            <div className="bg-primary/20 border-primary/20 rounded-lg border p-1.5">
+              <svg className="text-primary h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z" />
               </svg>
             </div>
-            <h1 className="font-extrabold text-lg tracking-tight uppercase">
+            <h1 className="text-lg font-extrabold tracking-tight uppercase">
               VIETNAM <span className="text-primary">TRENDING</span>
             </h1>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden xl:flex items-center gap-8" id="nav-tabs">
+          <nav className="hidden items-center gap-8 xl:flex" id="nav-tabs">
             {navItems.map((item) => {
               const isActive =
-                item.href === '/'
-                  ? pathname === '/'
-                  : pathname.startsWith(item.href);
+                item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
               return (
                 <Link
                   key={item.href}
@@ -79,7 +78,7 @@ export default function TopNavbar() {
             <div className="h-4 w-px bg-white/10" />
             <Link
               href="/vip"
-              className="text-sm font-bold text-primary flex items-center gap-1.5"
+              className="text-primary flex items-center gap-1.5 text-sm font-bold"
               id="nav-tab-vip"
             >
               ★ VIP SIGNALS
@@ -90,13 +89,15 @@ export default function TopNavbar() {
         {/* Right side */}
         <div className="flex items-center gap-6">
           {/* Search */}
-          <div className="hidden md:flex items-center bg-white/5 border border-white/10 rounded-full px-4 py-1.5 gap-2 focus-within:border-primary/50 transition-all">
-            <HiOutlineSearch size={16} className="text-text-secondary" />
-            <input
-              className="bg-transparent border-none focus:ring-0 text-sm w-44 p-0 placeholder:text-text-muted outline-none"
+          <div className="hidden md:block">
+            <Input
+              leftIcon={<HiOutlineSearch size={16} />}
               placeholder="Search assets..."
               type="text"
               id="nav-search-input"
+              pill
+              inputSize="sm"
+              className="w-52"
             />
           </div>
 
@@ -104,7 +105,7 @@ export default function TopNavbar() {
             {/* Theme toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 text-text-secondary hover:text-primary transition-colors"
+              className="text-text-secondary hover:text-primary p-2 transition-colors"
               aria-label="Toggle theme"
               id="nav-theme-btn"
             >
@@ -114,7 +115,7 @@ export default function TopNavbar() {
             {/* Notification (only when logged in) */}
             {isLoggedIn && (
               <button
-                className="p-2 text-text-secondary hover:text-text-primary transition-colors"
+                className="text-text-secondary hover:text-text-primary p-2 transition-colors"
                 aria-label="Notifications"
                 id="nav-notifications-btn"
               >
@@ -124,28 +125,29 @@ export default function TopNavbar() {
 
             {/* Auth buttons */}
             {isLoggedIn ? (
-              <button
-                className="hidden items-center gap-2 border border-white/10 bg-white/5 rounded-lg px-3 py-1.5 text-xs font-medium text-text-primary transition-colors hover:border-white/20 sm:flex"
+              <Button
+                variant="outline"
+                size="sm"
                 id="nav-wallet-btn"
+                className="hidden sm:inline-flex"
               >
-                <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                <span className="bg-primary h-2 w-2 animate-pulse rounded-full" />
                 0x71...4F2
-              </button>
+              </Button>
             ) : (
               <>
-                <button
+                <Button
+                  variant="ghost"
+                  size="md"
                   onClick={() => setShowLogin(true)}
-                  className="text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors"
                   id="nav-login-btn"
+                  className="font-semibold"
                 >
                   Login
-                </button>
-                <button
-                  className="bg-primary text-bg-app text-sm font-bold px-5 py-2 rounded-xl shadow-lg hover:brightness-110 transition-all"
-                  id="nav-gopro-btn"
-                >
+                </Button>
+                <Button size="md" id="nav-gopro-btn" className="shadow-lg">
                   Join Pro
-                </button>
+                </Button>
               </>
             )}
           </div>
@@ -154,19 +156,18 @@ export default function TopNavbar() {
 
       {/* Mobile menu dropdown */}
       {mobileMenuOpen && (
-        <nav className="nav-blur border-b border-white/5 px-6 pb-3 pt-2 xl:hidden">
+        <nav className="nav-blur border-b border-white/5 px-6 pt-2 pb-3 xl:hidden">
           {navItems.map((item) => {
-            const isActive =
-              item.href === '/'
-                ? pathname === '/'
-                : pathname.startsWith(item.href);
+            const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive ? 'text-text-primary bg-white/5' : 'text-text-secondary hover:text-text-primary'
+                  isActive
+                    ? 'text-text-primary bg-white/5'
+                    : 'text-text-secondary hover:text-text-primary'
                 }`}
               >
                 {item.label}
@@ -176,7 +177,7 @@ export default function TopNavbar() {
           <Link
             href="/vip"
             onClick={() => setMobileMenuOpen(false)}
-            className="block rounded-lg px-3 py-2 text-sm font-bold text-primary"
+            className="text-primary block rounded-lg px-3 py-2 text-sm font-bold"
           >
             ★ VIP SIGNALS
           </Link>

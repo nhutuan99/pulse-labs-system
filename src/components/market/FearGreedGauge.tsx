@@ -3,8 +3,11 @@
 // ============================================
 // FearGreedGauge — Circular sentiment gauge
 // ============================================
+// Refactored to use base components:
+// GlassCard, CircularGauge
+// ============================================
 
-import GlassCard from '@/components/base/GlassCard';
+import { GlassCard, CircularGauge } from '@/components/base';
 
 interface FearGreedGaugeProps {
   value?: number;
@@ -37,46 +40,24 @@ export default function FearGreedGauge({ value = 78, label }: FearGreedGaugeProp
   const colorClass = getGaugeColorClass(value);
   const strokeColor = getGaugeStrokeVar(value);
   const statusLabel = label || getGaugeLabel(value);
-  const circumference = 2 * Math.PI * 45;
-  const dashOffset = circumference - (value / 100) * circumference;
 
   return (
     <GlassCard padding="md" className="flex flex-col items-center">
-      <p className="mb-3 text-[10px] font-medium uppercase tracking-widest text-text-muted">
+      <p className="text-text-muted mb-3 text-[10px] font-medium tracking-widest uppercase">
         Market Sentiment
       </p>
 
       {/* Gauge */}
-      <div className="relative flex h-28 w-28 items-center justify-center">
-        <svg className="-rotate-90" width="112" height="112" viewBox="0 0 112 112">
-          {/* Background circle */}
-          <circle
-            cx="56" cy="56" r="45"
-            fill="none"
-            stroke="var(--color-border-glass)"
-            strokeWidth="8"
-          />
-          {/* Value arc */}
-          <circle
-            cx="56" cy="56" r="45"
-            fill="none"
-            stroke={strokeColor}
-            strokeWidth="8"
-            strokeDasharray={circumference}
-            strokeDashoffset={dashOffset}
-            strokeLinecap="round"
-            className="transition-all duration-1000"
-          />
-        </svg>
-        <div className="absolute flex flex-col items-center">
-          <span className={`text-3xl font-bold ${colorClass}`}>{value}</span>
-        </div>
-      </div>
+      <CircularGauge
+        value={value}
+        size={112}
+        strokeWidth={8}
+        strokeColor={strokeColor}
+        center={<span className={`text-3xl font-bold ${colorClass}`}>{value}</span>}
+      />
 
       {/* Label */}
-      <span className={`mt-2 text-sm font-medium ${colorClass}`}>
-        {statusLabel}
-      </span>
+      <span className={`mt-2 text-sm font-medium ${colorClass}`}>{statusLabel}</span>
     </GlassCard>
   );
 }
