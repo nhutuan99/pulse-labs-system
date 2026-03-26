@@ -2,190 +2,73 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import {
-  HiOutlineMenuAlt2,
-  HiOutlineBell,
-  HiOutlineX,
-  HiOutlineSun,
-  HiOutlineMoon,
-  HiOutlineSearch,
-} from 'react-icons/hi';
-import LoginModal from '@/components/modals/LoginModal';
-import { useTheme } from '@/providers/AppProvider';
-import { Button, Input } from '@/components/base';
 
 const navItems = [
-  { label: 'Markets', href: '/' },
-  { label: 'Derivatives', href: '/derivatives' },
-  { label: 'Order Flow', href: '/order-flow' },
-  { label: 'Analysis', href: '/analysis' },
+  { label: 'Ecosystem', href: '/' },
+  { label: 'Archive', href: '/portfolio' },
+  { label: 'Nodes', href: '/signals' },
+  { label: 'Terminal', href: '/' },
 ];
 
 export default function TopNavbar() {
-  const pathname = usePathname();
-  const { isDark, toggleTheme } = useTheme();
-  const [showLogin, setShowLogin] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // TODO: Replace with real auth state
-  const isLoggedIn = false;
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <>
-      <header className="nav-blur sticky top-0 z-50 flex h-16 items-center justify-between border-b border-white/5 px-6">
-        <div className="flex items-center gap-10">
-          {/* Mobile menu button */}
-          <button
-            className="text-text-secondary hover:text-text-primary flex h-8 w-8 items-center justify-center rounded-lg transition-colors xl:hidden"
-            aria-label="Menu"
-            id="nav-menu-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <HiOutlineX size={18} /> : <HiOutlineMenuAlt2 size={18} />}
-          </button>
-
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="bg-primary/20 border-primary/20 rounded-lg border p-1.5">
-              <svg className="text-primary h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z" />
-              </svg>
-            </div>
-            <h1 className="text-lg font-extrabold tracking-tight uppercase">
-              VIETNAM <span className="text-primary">TRENDING</span>
-            </h1>
+      <header className="fixed top-0 z-50 w-full border-b border-white/5 bg-[#080A0F]/60 shadow-2xl shadow-[#0ECB81]/5 backdrop-blur-xl">
+        <div className="mx-auto flex h-20 w-full max-w-360 items-center justify-between px-4 md:px-8">
+          <Link href="/" className="text-xl font-bold tracking-tighter text-[#0ECB81]">
+            TrendPulse
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden items-center gap-8 xl:flex" id="nav-tabs">
-            {navItems.map((item) => {
-              const isActive =
-                item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`text-sm font-medium transition-colors ${
-                    isActive ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
-                  }`}
-                  id={`nav-tab-${item.label.toLowerCase().replace(/\s/g, '-')}`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-            <div className="h-4 w-px bg-white/10" />
-            <Link
-              href="/vip"
-              className="text-primary flex items-center gap-1.5 text-sm font-bold"
-              id="nav-tab-vip"
-            >
-              ★ VIP SIGNALS
-            </Link>
-          </nav>
-        </div>
-
-        {/* Right side */}
-        <div className="flex items-center gap-6">
-          {/* Search */}
-          <div className="hidden md:block">
-            <Input
-              leftIcon={<HiOutlineSearch size={16} />}
-              placeholder="Search assets..."
-              type="text"
-              id="nav-search-input"
-              pill
-              inputSize="sm"
-              className="w-52"
-            />
-          </div>
-
-          <div className="flex items-center gap-3">
-            {/* Theme toggle */}
-            <button
-              onClick={toggleTheme}
-              className="text-text-secondary hover:text-primary p-2 transition-colors"
-              aria-label="Toggle theme"
-              id="nav-theme-btn"
-            >
-              {isDark ? <HiOutlineSun size={20} /> : <HiOutlineMoon size={20} />}
-            </button>
-
-            {/* Notification (only when logged in) */}
-            {isLoggedIn && (
-              <button
-                className="text-text-secondary hover:text-text-primary p-2 transition-colors"
-                aria-label="Notifications"
-                id="nav-notifications-btn"
-              >
-                <HiOutlineBell size={20} />
-              </button>
-            )}
-
-            {/* Auth buttons */}
-            {isLoggedIn ? (
-              <Button
-                variant="outline"
-                size="sm"
-                id="nav-wallet-btn"
-                className="hidden sm:inline-flex"
-              >
-                <span className="bg-primary h-2 w-2 animate-pulse rounded-full" />
-                0x71...4F2
-              </Button>
-            ) : (
-              <>
-                <Button
-                  variant="ghost"
-                  size="md"
-                  onClick={() => setShowLogin(true)}
-                  id="nav-login-btn"
-                  className="font-semibold"
-                >
-                  Login
-                </Button>
-                <Button size="md" id="nav-gopro-btn" className="shadow-lg">
-                  Join Pro
-                </Button>
-              </>
-            )}
-          </div>
-        </div>
-      </header>
-
-      {/* Mobile menu dropdown */}
-      {mobileMenuOpen && (
-        <nav className="nav-blur border-b border-white/5 px-6 pt-2 pb-3 xl:hidden">
-          {navItems.map((item) => {
-            const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
-            return (
+          <nav className="hidden items-center gap-10 md:flex">
+            {navItems.map((item, idx) => (
               <Link
-                key={item.href}
+                key={item.label}
                 href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'text-text-primary bg-white/5'
-                    : 'text-text-secondary hover:text-text-primary'
+                className={`text-sm font-medium tracking-tight transition-colors duration-300 ${
+                  idx === 0 ? 'text-[#0ECB81]' : 'text-slate-400 hover:text-[#0ECB81]'
                 }`}
               >
                 {item.label}
               </Link>
-            );
-          })}
-          <Link
-            href="/vip"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-primary block rounded-lg px-3 py-2 text-sm font-bold"
-          >
-            ★ VIP SIGNALS
-          </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setMobileOpen((v) => !v)}
+              className="rounded border border-white/10 px-3 py-1.5 text-xs tracking-wider text-slate-300 uppercase md:hidden"
+              aria-label="Toggle mobile navigation"
+            >
+              Menu
+            </button>
+            <Link
+              href="/dashboard"
+              className="rounded bg-[#0ECB81] px-5 py-2.5 text-sm font-semibold text-[#002111] transition-transform active:scale-95"
+            >
+              Launch App
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {mobileOpen && (
+        <nav className="fixed top-20 z-40 w-full border-b border-white/5 bg-[#080A0F]/95 px-4 py-3 backdrop-blur md:hidden">
+          <div className="mx-auto flex w-full max-w-360 flex-col gap-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className="rounded px-3 py-2 text-sm text-slate-300 transition-colors hover:bg-white/5 hover:text-[#0ECB81]"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </nav>
       )}
-
-      {/* Login Modal */}
-      <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} />
     </>
   );
 }

@@ -42,3 +42,6 @@ next-env.d.ts
 
 # agent skills kit (local only)
 .agent/
+
+# local downloads
+downloads/
